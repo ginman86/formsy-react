@@ -107,6 +107,7 @@ Formsy.Mixin = {
     }
 
     this.setValidations();
+    this.props._attachToForm(this);
   },
 
   // We have to make the validate method is kept when new props are added
@@ -127,7 +128,6 @@ Formsy.Mixin = {
       this._validations = this.props.validations ? this.props.validations + ',' : '';
       this._validations += 'isValue';
     }
-    this.props._attachToForm(this);
   },
 
   // Detach it when component unmounts
