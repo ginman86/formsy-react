@@ -123,6 +123,9 @@ Formsy.Mixin = {
     nextProps._attachToForm = this.props._attachToForm;
     nextProps._detachFromForm = this.props._detachFromForm;
     nextProps._validate = this.props._validate;
+
+    //update validations? should already have isValue if required
+    this._validations = this.props.validations;
   },
 
   // Detach it when component unmounts
@@ -241,7 +244,7 @@ Formsy.Form = React.createClass({
       this.model[name] = component.state._value;
     }.bind(this));
   },
-  
+
   // Reset each key in the model to the original / initial value
   resetModel: function() {
     Object.keys(this.inputs).forEach(function (name) {
