@@ -106,14 +106,7 @@ Formsy.Mixin = {
       throw new Error('Form Mixin requires component to be nested in a Form');
     }
 
-    // Add validations to the store itself as the props object can not be modified
-    this._validations = this.props.validations || '';
-
-    if (this.props.required) {
-      this._validations = this.props.validations ? this.props.validations + ',' : '';
-      this._validations += 'isValue';
-    }
-    this.props._attachToForm(this);
+    setValidations();
   },
 
   // We have to make the validate method is kept when new props are added
@@ -123,7 +116,18 @@ Formsy.Mixin = {
     nextProps._validate = this.props._validate;
 
     //update validations? should already have isValue if required
-    this._validations = this.props.validations;
+    setValidations();
+  },
+
+  setValidations: function() {
+    // Add validations to the store itself as the props object can not be modified
+    this._validations = this.props.validations || '';
+
+    if (this.props.required) {
+      this._validations = this.props.validations ? this.props.validations + ',' : '';
+      this._validations += 'isValue';
+    }
+    this.props._attachToForm(this);
   },
 
   // Detach it when component unmounts
